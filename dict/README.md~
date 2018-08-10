@@ -1,0 +1,19 @@
+# 音素列へのコンパイル
+
+1. *.yomiを修正
+
+2. 作成したファイルをonsoretu_yomi_compile.shでコンパイル
+
+# 構文の定義
+
+1. *.grammarを修正
+
+2. *.vocaを修正
+
+3. 作成したファイルをgrammar_voca_compile.shでコンパイル
+
+# テスト実行
+
+```
+$ julius -C -gram ~/dict/my_dict
+```
