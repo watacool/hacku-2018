@@ -1,12 +1,16 @@
-0	[イチゴ]	i ch i g o
-1	[すいか]	s u i k a
-2	[リンゴ]	r i N g o
-3	[グレープ]	g u r e: p u
-4	[ブドウ]	b u d o u
-5	[メロン]	m e r o N
+0	[ジュリアス]	j u r i a s u
+1	[オッケージュリアス]	o q k e: j u r i a s u
+2	[オッケージュリウス]	o q k e: j u r i u s u
+3	[イチゴ]	i ch i g o
+4	[すいか]	s u i k a
+5	[リンゴ]	r i N g o
 6	[ブルーハワイ]	b u r u: h a w a i
-7	[レインボー]	r e i N b o:
-8	[カラフル]	k a r a f u r u
-9	[虹色]	n i j i i r o
-10	[[s]]	silB
-11	[[/s]]	silE
+7	[メロン]	m e r o N
+8	[レモン]	r e m o N
+9	[グレープ]	g u r e: p u
+10	[ブドウ]	b u d o u
+11	[レインボー]	r e i N b o:
+12	[カラフル]	k a r a f u r u
+13	[虹色]	n i j i i r o
+14	[[s]]	silB
+15	[[/s]]	silE
