@@ -6,7 +6,7 @@
   * Release date:2018-06-27
   * Kernel version:4.14
 * 音声認識エンジン：Julius4.4.2
-* 言語：python2.7
+* 言語：python3.6
 
 ### ファイル配置
 
@@ -14,3 +14,4 @@
 * 例：/home/user/  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| -- julius-4.4.2  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| -- this repository  
+
