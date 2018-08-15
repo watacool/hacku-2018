@@ -23,7 +23,7 @@ YELLOW = ('レモン', )
 PURPLE = ('グレープ', 'ブドウ')
 COLORFULL = ('レインボー', 'カラフル', '虹色')
 
-DEBUG_MODE = 1
+DEBUG_MODE = 0
 
 def parse_word(data_str):
     word = None
