@@ -1,6 +1,7 @@
 # coding: utf-8
 import socket
 from datetime import datetime
+from time import sleep
 
 J_HOST = '127.0.0.1' # localhost
 J_PORT = 10500   # julisu server's default port
@@ -13,7 +14,7 @@ INIT = 'INIT' # waiting for 'ok julius'
 CONTROL = 'CONTROL' # waiting for instruction of color
 
 # define julius call
-CALLJULIUS = ('ジュリアス', 'オッケージュリアス', 'ジュリウス', 'オッケージュリウス')
+CALLJULIUS = ('ジュリアス', 'オッケージュリアス', 'オッケージュリウス')
 
 # define word and color
 RED = ('イチゴ', 'すいか', 'リンゴ')
@@ -27,19 +28,16 @@ DEBUG_MODE = 0
 
 def parse_word(data_str):
     word = None
-    state = 1
-    keys = ["[/s]"]
-    for key in keys:
-        if key not in data_str:
-            state = 0
-    if state == 1:
-        start = data_str.find('"') + 1
-        end = data_str.find('"', start)
-        if start == -1 or end == -1:
-            word = None
-        else:
-            word = data_str[start:end]
-    return word
+    data_str = data_str.split('\n')
+    for str in data_str:
+        if 'WHYPO' in str:
+            start = str.find('"') + 1
+            end = str.find('"', start)
+            word = str[start:end]
+            if '[s]' not in word and '[/s]' not in word:
+                return word
+    return None
+
 
 def send_sig(sig):
     '''
@@ -47,12 +45,13 @@ def send_sig(sig):
     '''
     tc_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     tc_sock.sendto(sig.encode('utf-8'), (TC_HOST, TC_PORT))
+    output = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    output += '\n## send signal: ' + sig
+    print(output)
     if DEBUG_MODE == 1:
-        output = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-        output += '## send signal: '+sig
-        print(output)
         with open("debug.txt", mode='a') as f:
             f.write(output)
+    tc_sock.close()
     return 0
 
 def main():
@@ -63,15 +62,16 @@ def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((J_HOST, J_PORT))
     state = INIT
+    pre_state = INIT
     while True:
         data = str(sock.recv(2048).decode('utf-8'))
+        sleep(0.1)
         word = parse_word(data)
 
         # debug
         if DEBUG_MODE == 1:
             defugfile = "debug.txt"
             output = "data start\n" + data + "\ndata end\n"
-            if word is not None: output += "word start\n" + word + "\nword end\n"
             print(output)
             with open(defugfile, mode='a') as f:
                 f.write(output)
@@ -79,9 +79,12 @@ def main():
         if word is None:
             print("Error: word is None")
             continue
+        else:
+            print("Word is {}".format(word))
 
         # switch state
         if word in CALLJULIUS:
+            pre_state = state
             state = CONTROL
         elif state == CONTROL:
             if word in RED:
@@ -96,15 +99,23 @@ def main():
                 send_sig('RB')
             elif word in COLORFULL:
                 send_sig('C')
+            else:
+                pre_state = state
+                output = "#### SKIP state is "+pre_state+" => " + state + " and receive " + word
+                print(output)
+                continue
+            pre_state = state
             state = INIT
         else:
+            pre_state = state
             state = INIT
 
+
+        if word is not None: output = "## state is "+pre_state+" => "+state+" and receive "+word
+        else: output = "## state is "+pre_state+" => "+state
+        print(output)
         # debug
         if DEBUG_MODE == 1:
-            if word is not None: output = "## state is "+state+" and receive "+word+"\n"
-            else: output = "## state is "+state+"\n"
-            print(output)
             with open(defugfile, mode='a') as f:
                 f.write(output)
 
