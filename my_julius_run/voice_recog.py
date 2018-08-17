@@ -14,7 +14,7 @@ INIT = 'INIT' # waiting for 'ok julius'
 CONTROL = 'CONTROL' # waiting for instruction of color
 
 # define julius call
-CALLJULIUS = ('ジュリアス', 'オッケージュリアス', 'オッケージュリウス', 'バエゴオリ')
+CALLJULIUS = ('ギース', 'オッケーギース', 'フローズンギース', 'オッケーフローズンギース', 'スノーギース')
 
 # define word and color
 RED = ('イチゴ', 'すいか', 'リンゴ')
