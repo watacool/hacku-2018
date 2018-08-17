@@ -14,7 +14,7 @@ INIT = 'INIT' # waiting for 'ok julius'
 CONTROL = 'CONTROL' # waiting for instruction of color
 
 # define julius call
-CALLJULIUS = ('ジュリアス', 'オッケージュリアス', 'オッケージュリウス')
+CALLJULIUS = ('ジュリアス', 'オッケージュリアス', 'オッケージュリウス', 'バエゴオリ')
 
 # define word and color
 RED = ('イチゴ', 'すいか', 'リンゴ')
@@ -59,6 +59,7 @@ def main():
     reference
     https://qiita.com/nanako_ut/items/0b42cb956929a7ac739a
     '''
+    
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.connect((J_HOST, J_PORT))
     state = INIT
@@ -84,6 +85,7 @@ def main():
 
         # switch state
         if word in CALLJULIUS:
+            send_sig('')
             pre_state = state
             state = CONTROL
         elif state == CONTROL:
