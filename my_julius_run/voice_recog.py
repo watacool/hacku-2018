@@ -1,7 +1,9 @@
 # coding: utf-8
+import os
 import socket
 from datetime import datetime
 from time import sleep
+from camera import shutter, dbx_upload
 
 J_HOST = '127.0.0.1' # localhost
 J_PORT = 10500   # julisu server's default port
@@ -23,6 +25,8 @@ GREEN = ('メロン', )
 YELLOW = ('レモン', )
 PURPLE = ('グレープ', 'ブドウ')
 COLORFULL = ('レインボー', 'カラフル', '虹色')
+
+SHUTTER = ('しゃしん', 'しゃしんとって', 'かんぱい')
 
 DEBUG_MODE = 0
 
@@ -100,6 +104,15 @@ def main():
             elif word in PURPLE:
                 send_sig('RB')
             elif word in COLORFULL:
+                send_sig('C')
+            elif word in SHUTTER:
+                send_sig('')
+                send_sig('C')
+                sleep(1.0)
+                photo_dir = os.path.join(os.getcwd(), "camera", "photo")
+                shutter.shutter(id='A', dir=photo_dir)
+                dbx_upload.upload(dir=photo_dir)
+                send_sig('')
                 send_sig('C')
             else:
                 pre_state = state
