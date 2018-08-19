@@ -1,2 +1,5 @@
 *~
+*.pyc
+setup.txt
+my_julius_run/control_test_client.py
 camera/photo
