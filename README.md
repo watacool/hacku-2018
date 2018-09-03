@@ -29,3 +29,7 @@ $ ps x
 出力例：1194 pts/0    Sl     0:04 julius -C /home/user/julius-4.4.2/julius-kit/dictation-kit-v4.4/am-gmm.jconf
 $ pkill -e julius
 ```
+
+### 実行動画
+
+* https://www.youtube.com/watch?v=MmwuqiqmXt4
